@@ -3,11 +3,15 @@ variable "profile" {
 }
 
 variable "region1" {
-  type = string
+  type    = string
   default = "us-east-1"
 }
 
 variable "region2" {
-  type = string
+  type    = string
   default = "us-west-2"
+}
+
+variable "tfstatebucket" {
+  type = string
 }

@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "redbucket" {
-  bucket = "isoktodelete908098"
+  bucket = var.tfstatebucket
   acl    = "private"
 
   tags = {
