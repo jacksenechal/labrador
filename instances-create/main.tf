@@ -11,6 +11,7 @@ terraform {
     encrypt = true
     key     = "tftate/apps"
     bucket  = "isoktodelete908098"
-    dynamodb_table = "tfstate-lock"
+    #    dynamodb_table = "tfstate-lock"
   }
 }
+

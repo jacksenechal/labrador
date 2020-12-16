@@ -15,3 +15,13 @@ variable "region2" {
 variable "tfstatebucket" {
   type = string
 }
+
+variable "subnet_ids" {
+  description = "Existing subnets"
+  type        = list(any)
+}
+
+variable "first-contact" {
+  description = "Deploy zero day access ssh public key"
+  type        = map(any)
+}
