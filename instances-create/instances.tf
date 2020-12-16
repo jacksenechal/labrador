@@ -5,13 +5,13 @@ resource "aws_key_pair" "first-contact" {
 }
 
 resource "aws_instance" "apps" {
-  count                  = 4
-  ami                    = "ami-00430184c7bb49914"
-  instance_type          = "t2.micro"
+  count                  = var.instances
+  ami                    = var.ami-id
+  instance_type          = var.instance-type
   subnet_id              = element(var.subnet_ids, count.index)
-  vpc_security_group_ids = ["sg-099d4e6e", "sg-c79f4ca0"]
-  key_name               = aws_key_pair.first-contact
-  
+  vpc_security_group_ids = var.instance-sg
+  key_name               = aws_key_pair.first-contact.key_name
+
   tags = {
     Name        = "app${count.index + 1}-bigmaven"
     Environment = "doit"
