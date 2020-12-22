@@ -7,11 +7,10 @@ terraform {
     }
   }
   backend "s3" {
-    region  = "us-east-1"
-    encrypt = true
-    key     = "tftate/apps"
-    bucket  = "isoktodelete908098"
-    #    dynamodb_table = "tfstate-lock"
+    region         = "us-east-1"
+    encrypt        = true
+    key            = "tftate/apps"
+    bucket         = "isoktodelete908098"
+    dynamodb_table = "tf-lock-dynamo"
   }
 }
-
