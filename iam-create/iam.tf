@@ -1,5 +1,5 @@
-resource "aws_iam_role_policy" "terraform_restricted" {
-  name = "terraform_granted"
+resource "aws_iam_role_policy" "terraform_role_policy" {
+  name = "terraform_role_policy"
   role = aws_iam_role.terraform_role.id
 
   policy = <<-EOPolicy
@@ -102,7 +102,10 @@ resource "aws_iam_role_policy" "terraform_restricted" {
         "s3:GetObject",
         "s3:HeadBucket",
         "s3:ListBucket",
-        "s3:PutObject"
+        "s3:PutObject",
+        "dynamodb:GetItem",
+        "dynamodb:PutItem",
+        "dynamodb:DeleteItem"
       ],
       "Effect": "Allow",
       "Resource": "*"
@@ -114,7 +117,7 @@ resource "aws_iam_role_policy" "terraform_restricted" {
 
 # aws_iam_user.tf_user.arn is created in user.tf.
 resource "aws_iam_role" "terraform_role" {
-  name = "terraform_assume"
+  name = "terraform_role"
 
   assume_role_policy = <<-EORolePolicy
   {

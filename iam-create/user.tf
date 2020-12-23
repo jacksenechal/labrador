@@ -3,8 +3,8 @@ resource "aws_iam_user" "tf_user" {
   path = "/"
 
   tags = {
-    Purpose = "Terraform"
-    Name    = "terraformuser"
+    Purpose = "Terraform Infrastructure Deployment"
+    Name    = "Terraform Identity"
   }
 }
 
