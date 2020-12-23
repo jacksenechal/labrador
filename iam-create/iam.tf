@@ -1,10 +1,8 @@
-# Create a policy with granular grants to create and delete.
-resource "aws_iam_policy" "terraform_aws_restricted" {
-  name        = "terraformRestricted"
-  path        = "/"
-  description = "Terraform granted access"
+resource "aws_iam_role_policy" "terraform_restricted" {
+  name = "terraform_granted"
+  role = aws_iam_role.terraform_role.id
 
-  policy = <<EOPolicy
+  policy = <<-EOPolicy
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -111,5 +109,26 @@ resource "aws_iam_policy" "terraform_aws_restricted" {
     }
   ]
 }
-EOPolicy
+  EOPolicy
+}
+
+# aws_iam_user.tf_user.arn is created in user.tf.
+resource "aws_iam_role" "terraform_role" {
+  name = "terraform_assume"
+
+  assume_role_policy = <<-EORolePolicy
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Action": "sts:AssumeRole",
+        "Principal": {
+          "AWS": "${aws_iam_user.tf_user.arn}"
+        },
+        "Effect": "Allow",
+        "Sid": "FGJTerraformAssumeRole"
+      }
+    ]
+  }
+  EORolePolicy
 }
