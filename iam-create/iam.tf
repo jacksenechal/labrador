@@ -43,6 +43,7 @@ resource "aws_iam_role_policy" "terraform_role_policy" {
         "ec2:DeleteInternetGateway",
         "ec2:ImportKeyPair",
         "ec2:ModifySubnetAttribute",
+        "ec2:ModifyInstanceAttribute",
         "ec2:ModifyVpcAttribute",
         "ec2:ModifyVpcPeeringConnectionOptions",
         "ec2:RejectVpcPeeringConnection",
