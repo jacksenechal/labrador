@@ -1,6 +1,6 @@
 resource "aws_security_group" "edge-of-tomorrow" {
 
-  name        = "edge-of-tomorrow-sg"
+  name        = "edge-of-tomorrow-SG"
   description = "Allow TCP/22"
   vpc_id      = var.vpc-id
   ingress {
@@ -15,5 +15,10 @@ resource "aws_security_group" "edge-of-tomorrow" {
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
+  }
+  
+  tags = {
+    Name = aws_security_group.edge-of-tomorrow.name  
+    Purpose = "Network access to edge-of-tomorrow"
   }
 }
