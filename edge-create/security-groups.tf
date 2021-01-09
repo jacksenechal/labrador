@@ -16,9 +16,6 @@ resource "aws_security_group" "edge-of-tomorrow" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-  
-  tags = {
-    Name = aws_security_group.edge-of-tomorrow.name  
-    Purpose = "Network access to edge-of-tomorrow"
-  }
+
+  tags = merge(local.common_tags, map("Name", "edge-of-tomorrow-SG"))
 }

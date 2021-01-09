@@ -45,3 +45,8 @@ variable "external_ip" {
   description = "IP range to allow ssh"
   type        = string
 }
+
+variable "common_tags" {
+  description = "Base tags for all resources"
+  type        = map(any)
+}
