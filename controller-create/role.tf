@@ -1,6 +1,6 @@
 resource "aws_iam_role_policy" "terraform_role_policy" {
-  name = "terraform_role_policy"
-  role = aws_iam_role.terraform_role.id
+  name = "terraform_authorization_policy"
+  role = aws_iam_role.terraform_control_role.id
 
   policy = <<-EOPolicy
 {
@@ -115,17 +115,11 @@ resource "aws_iam_role_policy" "terraform_role_policy" {
   ]
 }
   EOPolicy
-
-  tags = {
-    Name =  "Terraform Policy"
-    Purpose = "Terraform authorization"
-    Origin  = "Fernando Jimenez"
-  }
 }
 
 
-resource "aws_iam_role" "terraform_role" {
-  name = "terraform_role"
+resource "aws_iam_role" "terraform_controller_role" {
+  name = "controller_role"
 
   assume_role_policy = <<-EORolePolicy
   {
@@ -144,8 +138,8 @@ resource "aws_iam_role" "terraform_role" {
   EORolePolicy
   
   tags = {
-    Name =  "Terraform Role"
-    Purpose = "Terraform Role attached to an instance"
+    Name =  "Terraform Controller Role"
+    Purpose = "Terraform Controller Role Instance"
     Origin = "Fernando Jimenez"
   }
 }
