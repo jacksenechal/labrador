@@ -1,19 +1,23 @@
 variable "profile" {
-  type = string
+  type        = string
+  description = "AWS profile to be used"
 }
 
 variable "region1" {
-  type    = string
-  default = "us-east-1"
+  type        = string
+  default     = "us-east-1"
+  description = "North Virginia Region"
 }
 
 variable "region2" {
-  type    = string
-  default = "us-west-2"
+  type        = string
+  default     = "us-west-2"
+  description = "Oregon Region"
 }
 
 variable "tfstatebucket" {
-  type = string
+  type        = string
+  description = "S3 bucket to keep the terraform state"
 }
 
 variable "common_tags" {
@@ -21,13 +25,11 @@ variable "common_tags" {
   type        = map(any)
 }
 
-# VPC CIDR block
 variable "vpc_cidr" {
-  default     = "10.0.0.0/16"
   description = "The CIDR block to be used by the VPC"
+  type        = string
 }
 
-# The number of bits to extend VPC's CIDR as per 
 # https://www.terraform.io/docs/configuration/functions/cidrsubnet.html
 variable "subnet_cidr_newbits" {
   type        = string
