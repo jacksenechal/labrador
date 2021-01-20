@@ -1,5 +1,5 @@
 ---
-- name: Prepares the node as an Terraform/Ansible controller
+- name: Prepares a Terraform-Ansible controller
   hosts: "{{ target_hosts }}"
   become: true
   remote_user: ubuntu
@@ -21,3 +21,11 @@
         pkg:
         - unzip
         - terraform
+        - python3-pip
+
+    - name: Install Ansible
+      pip:
+        name:
+        - ansible
+        - boto3
+      
