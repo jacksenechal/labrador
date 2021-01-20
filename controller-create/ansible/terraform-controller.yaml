@@ -1,0 +1,10 @@
+---
+- hosts: "{{ target_hosts }}"
+  become: true
+  remote_user: ubuntu
+  become_user: root
+  tasks:
+    - name: install unzip
+      apt:
+        name: unzip
+        state: present

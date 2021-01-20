@@ -1,6 +1,6 @@
-resource "aws_security_group" "edge-of-tomorrow" {
+resource "aws_security_group" "tfcontroller" {
 
-  name        = "edge-of-tomorrow-SG"
+  name        = "tfcontroller-SG"
   description = "Allow TCP/22"
   vpc_id      = var.vpc-id
   ingress {
@@ -17,5 +17,5 @@ resource "aws_security_group" "edge-of-tomorrow" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = merge(local.common_tags, map("Name", "edge-of-tomorrow-SG"))
+  tags = merge(local.common_tags, map("Name", "tfController-SG"))
 }
