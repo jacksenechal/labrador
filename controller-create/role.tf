@@ -139,7 +139,7 @@ resource "aws_iam_role" "terraform_controller_role" {
   
   tags = {
     Name =  "Terraform Controller Role"
-    Purpose = "Terraform Controller Role for instance"
+    Purpose = "Terraform Controller Role Instance"
     Origin = "Fernando Jimenez"
   }
 }
