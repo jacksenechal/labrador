@@ -16,7 +16,7 @@
         state: present
         update_cache: yes
 
-    - name: Install packages
+    - name: Install Terraform
       apt:
         pkg:
         - unzip
@@ -29,3 +29,14 @@
         - ansible
         - boto3
       
+    - name: Unarchive aws_cli_v2
+      ansible.builtin.unarchive:
+        src: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
+        dest: /tmp/
+        creates: /usr/local/bin/aws
+        remote_src: yes
+      register: aws
+
+    - name: Install aws_cli_v2
+      command: /tmp/aws/install
+      when: aws.changed
