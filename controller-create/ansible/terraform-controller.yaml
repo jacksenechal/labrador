@@ -1,10 +1,23 @@
 ---
-- hosts: "{{ target_hosts }}"
+- name: Prepares the node as an Terraform/Ansible controller
+  hosts: "{{ target_hosts }}"
   become: true
   remote_user: ubuntu
   become_user: root
   tasks:
-    - name: install unzip
-      apt:
-        name: unzip
+    - name: Add HashiCorp Apt signing key
+      ansible.builtin.apt_key:
+        url: https://apt.releases.hashicorp.com/gpg
         state: present
+
+    - name: Add HashiCorp repository into sources list
+      ansible.builtin.apt_repository:
+        repo: deb [arch=amd64] https://apt.releases.hashicorp.com focal main
+        state: present
+        update_cache: yes
+
+    - name: Install packages
+      apt:
+        pkg:
+        - unzip
+        - terraform
