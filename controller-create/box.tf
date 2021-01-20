@@ -11,6 +11,7 @@ resource "aws_instance" "box" {
   vpc_security_group_ids      = [aws_security_group.edge-of-tomorrow.id]
   key_name                    = aws_key_pair.first-contact.key_name
   associate_public_ip_address = true
+  iam_instance_profile = aws_iam_instance_profile.controller_profile.name 
 
   tags = merge(local.common_tags, {
     Name = "edge-of-tomorrow"
