@@ -11,16 +11,23 @@ resource "aws_instance" "box" {
   vpc_security_group_ids      = [aws_security_group.tfcontroller.id]
   key_name                    = aws_key_pair.first-contact.key_name
   associate_public_ip_address = true
-  iam_instance_profile = aws_iam_instance_profile.controller_profile.name 
+  iam_instance_profile        = aws_iam_instance_profile.controller_profile.name
 
   tags = merge(local.common_tags, {
     Name = "tomorrow"
   Environment = "Do IT" })
 
+  provisioner "file" {
+    source =     "../instances-create"
+    destination = "/home/ubuntu/"
+    connection {
+      type = "ssh"
+      user = "ubuntu"
+      host = self.public_ip
+    }
+  }
+
   provisioner "local-exec" {
-    command = <<EOF
-aws --profile ${var.profile} ec2 wait instance-status-ok --region ${var.region2} --instance-ids ${self.id}
-ansible-playbook --extra-vars 'target_hosts=tag_Name_${self.tags.Name}' ansible/terraform-controller.yaml
-EOF
+    command = "ansible-playbook --extra-vars 'target_hosts=tag_Name_${self.tags.Name}' ansible/terraform-controller.yaml"
   }
 }

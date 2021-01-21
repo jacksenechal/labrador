@@ -136,15 +136,15 @@ resource "aws_iam_role" "terraform_controller_role" {
     ]
   }
   EORolePolicy
-  
+
   tags = {
-    Name =  "Terraform Controller Role"
+    Name    = "Terraform Controller Role"
     Purpose = "Terraform Controller Role Instance"
-    Origin = "Fernando Jimenez"
+    Origin  = "Fernando Jimenez"
   }
 }
 
 resource "aws_iam_instance_profile" "controller_profile" {
   name = "controller_profile"
-  role =  aws_iam_role.terraform_controller_role.name
+  role = aws_iam_role.terraform_controller_role.name
 }
