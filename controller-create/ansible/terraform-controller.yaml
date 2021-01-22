@@ -40,3 +40,8 @@
     - name: Install aws_cli_v2
       command: /tmp/aws/install
       when: aws.changed
+    
+    - name: Set hostname
+      hostname:
+        name: terraform-controller
+        use: systemd
