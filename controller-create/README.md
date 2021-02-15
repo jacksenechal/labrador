@@ -7,6 +7,7 @@ It does have an instance role attached to it with fine-grained permissions to wh
 ## Requires
 
 Create the S3 bucket and the Dynamo DB table needed for the remote backend remote.
+
 Create a terraform.tfvars with the following entries:
 
 ```
