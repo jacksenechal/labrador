@@ -26,13 +26,23 @@ variable "first-contact" {
   type        = map(any)
 }
 
-variable "instance-sg" {
-  description = "Security Groups for the app"
-  type        = list(string)
-}
-
 variable "instance-type" {
   description = "AWS instance type"
+  type        = string
+}
+
+variable "instance-tag-name" {
+  description = "Tag name for the instance. This should be unique-ish, to not conflict with other instances."
+  type        = string
+}
+
+variable "author-initials" {
+  description = "Your initials, for use in naming policies, etc"
+  type        = string
+}
+
+variable "hostname" {
+  description = "The hostname of the box"
   type        = string
 }
 

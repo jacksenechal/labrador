@@ -14,11 +14,12 @@ resource "aws_instance" "box" {
   iam_instance_profile        = aws_iam_instance_profile.controller_profile.name
 
   tags = merge(local.common_tags, {
-    Name = "tomorrow"
-  Environment = "Do IT" })
+    Name = var.instance-tag-name
+    Environment = "Do IT"
+  })
 
   provisioner "file" {
-    source =     "../instances-create"
+    source =     "terraform.tfvars" # doesn't matter, just need a file
     destination = "/home/ubuntu/"
     connection {
       type = "ssh"
@@ -28,6 +29,6 @@ resource "aws_instance" "box" {
   }
 
   provisioner "local-exec" {
-    command = "ansible-playbook --extra-vars 'target_hosts=tag_Name_${self.tags.Name}' ansible/terraform-controller.yaml"
+    command = "ansible-playbook --extra-vars 'target_hosts=tag_Name_${self.tags.Name} hostname=${var.hostname}' ansible/terraform-controller.yaml"
   }
 }

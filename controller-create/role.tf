@@ -7,7 +7,7 @@ resource "aws_iam_role_policy" "terraform_role_policy" {
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Sid": "FGJPolicyForTerraformGrant",
+      "Sid": "${var.author-initials}PolicyForTerraformGrant",
       "Action": [
         "ec2:Describe*",
         "ec2:Get*",
@@ -131,17 +131,17 @@ resource "aws_iam_role" "terraform_controller_role" {
           "Service": "ec2.amazonaws.com"
         },
         "Effect": "Allow",
-        "Sid": "FGJTerraformAssumeRole"
+        "Sid": "${var.author-initials}TerraformAssumeRole"
       }
     ]
   }
   EORolePolicy
 
-  tags = {
-    Name    = "Terraform Controller Role"
-    Purpose = "Terraform Controller Role Instance"
-    Origin  = "Fernando Jimenez"
-  }
+  tags = merge(local.common_tags, {
+      Name    = "Terraform Controller Role"
+      Purpose = "Terraform Controller Role Instance"
+    }
+  )
 }
 
 resource "aws_iam_instance_profile" "controller_profile" {
