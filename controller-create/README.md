@@ -1,11 +1,12 @@
 # Terraform and Ansible Controller Node
-Node that can be deploy as a controller node to deploy infrastructure using Terraform with Ansible.
+Node that can be deployed as a controller-unit to deploy infrastructure using Terraform with Ansible.
 
 It does have an instance role attached to it with fine-grained permissions to what it can deploy.
 
 
 ## Requires
 
+Create the S3 bucket and the Dynamo DB table needed for the remote backend remote.
 Create a terraform.tfvars with the following entries:
 
 ```
@@ -25,4 +26,3 @@ common_tags = {
 }
 ```
 
-Create the S3 bucket and the Dynamo DB table
