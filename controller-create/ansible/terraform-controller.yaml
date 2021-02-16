@@ -16,10 +16,11 @@
         state: present
         update_cache: yes
 
-    - name: Install Terraform
+    - name: Installing packages
       apt:
         pkg:
         - unzip
+        - git
         - terraform
         - python3-pip
 
