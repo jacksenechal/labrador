@@ -43,5 +43,5 @@
     
     - name: Set hostname
       hostname:
-        name: "{{ hostname }}"
+        name: "terraform-controller"
         use: systemd

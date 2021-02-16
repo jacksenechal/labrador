@@ -18,9 +18,8 @@ resource "aws_instance" "box" {
     Environment = "Do IT"
   })
 
-  provisioner "file" {
-    source =     "terraform.tfvars" # doesn't matter, just need a file
-    destination = "/home/ubuntu/"
+  provisioner "remote-exec" {
+    inline = ["echo 'Ready to grant you one wish'"]
     connection {
       type = "ssh"
       user = "ubuntu"
