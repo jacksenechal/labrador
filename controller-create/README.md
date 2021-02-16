@@ -17,7 +17,6 @@ subnet_ids    = ["subnet-xxxxxxxx", ...]
 first-contact = { "name" = "key_pair_name", "path" = "path/to/public_key" }
 instance-type = "aws instance type"
 instance-tag-name = "name for your instance"
-hostname      = "host name"
 vpc-id        = "vpc-xxxxxxxx"
 external_ip   = "cidr to allow access to ssh"
 common_tags = {

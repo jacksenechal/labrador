@@ -28,6 +28,6 @@ resource "aws_instance" "box" {
   }
 
   provisioner "local-exec" {
-    command = "ansible-playbook --extra-vars 'target_hosts=tag_Name_${self.tags.Name} hostname=${var.hostname}' ansible/terraform-controller.yaml"
+    command = "ansible-playbook --extra-vars 'target_hosts=tag_Name_${self.tags.Name} hostname=${self.tags.Name}' ansible/terraform-controller.yaml"
   }
 }

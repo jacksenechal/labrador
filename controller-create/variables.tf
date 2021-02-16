@@ -41,11 +41,6 @@ variable "author-initials" {
   type        = string
 }
 
-variable "hostname" {
-  description = "The hostname of the box"
-  type        = string
-}
-
 variable "vpc-id" {
   description = "VPC id"
   type        = string
