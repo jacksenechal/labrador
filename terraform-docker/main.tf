@@ -41,7 +41,7 @@ resource "random_string" "random" {
    image = docker_image.nodered_image.latest
    ports {
      internal = var.internal_port
-#     external = var.external_port
+     external = var.external_port + count.index
    }
  }
 
