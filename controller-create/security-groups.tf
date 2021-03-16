@@ -1,3 +1,7 @@
+data "http" "external_ip" {
+  url = "https://ifconfig.me"
+}
+
 resource "aws_security_group" "tfcontroller" {
 
   name        = "tfcontroller-SG"
@@ -8,7 +12,7 @@ resource "aws_security_group" "tfcontroller" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = [var.external_ip]
+    cidr_blocks = ["${chomp(data.http.external_ip.body)}/32"]
   }
   egress {
     from_port   = 0
