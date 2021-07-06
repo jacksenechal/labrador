@@ -117,6 +117,8 @@ resource "aws_iam_role_policy" "terraform_role_policy" {
   EOPolicy
 }
 
+# TODO separate out policy to an aws_iam_policy, then use aws_iam_role_policy_attachment to attach
+# then add `arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore` to enable SSM
 
 resource "aws_iam_role" "terraform_controller_role" {
   name = "controller_role"

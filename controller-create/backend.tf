@@ -6,11 +6,13 @@ terraform {
       version = "~> 3.0"
     }
   }
+/*
   backend "s3" {
-    region         = "us-east-1"
+    region         = "us-west-2"
     encrypt        = true
     key            = "tftate/control"
-    bucket         = "isoktodelete908098"
+    bucket         = "isoktodelete2602700jss"
     dynamodb_table = "tf-lock-dynamo"
   }
+*/
 }

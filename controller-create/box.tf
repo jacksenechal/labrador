@@ -5,7 +5,7 @@ resource "aws_key_pair" "first-contact" {
 }
 
 resource "aws_instance" "box" {
-  ami                         = data.aws_ami.ubuntu-20-04.id
+  ami                         = "ami-0133f33c119ae8655"
   instance_type               = var.instance-type
   subnet_id                   = element(var.subnet_ids, 0)
   vpc_security_group_ids      = [aws_security_group.tfcontroller.id]
@@ -27,7 +27,11 @@ resource "aws_instance" "box" {
     }
   }
 
-  provisioner "local-exec" {
-    command = "ansible-playbook --extra-vars 'target_hosts=tag_Name_${self.tags.Name} hostname=${self.tags.Name}' ansible/terraform-controller.yaml"
-  }
+  /* provisioner "local-exec" { */
+  /*   command = "ansible-playbook --extra-vars 'target_hosts=tag_Name_${self.tags.Name} hostname=${self.tags.Name}' ansible/terraform-controller.yaml" */
+  /* } */
+
+  /* provisioner "local-exec" { */
+  /*   command = "ansible-playbook --extra-vars 'target_hosts=tag_Name_${self.tags.Name} hostname=${self.tags.Name}' ansible/vault-controller.yaml" */
+  /* } */
 }

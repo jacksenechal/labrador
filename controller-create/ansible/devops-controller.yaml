@@ -1,0 +1,56 @@
+---
+- name: Prepares a devops controller
+  hosts: "{{ target_hosts }}"
+  remote_user: ubuntu
+  become: false
+  become_user: root
+  vars:
+    user_home: "{{ ansible_env.HOME }}"
+  tasks:
+    - name: create ~/workspace directory
+      file:
+        path: "{{ user_home }}/workspace"
+        state: directory
+    - name: check ssh keys
+      command: ssh-add -L
+    - name: clone boostrap-workstation repo
+      git:
+        repo: 'git@github.com:mavenlink/bootstrap-workstation.git'
+        dest: "{{ user_home }}/bootstrap-workstation"
+        accept_hostkey: yes
+    - name: clone devops repo
+      git:
+        repo: git@github.com:mavenlink/devops.git
+        dest: "{{ user_home }}/workspace/devops"
+        accept_hostkey: yes
+    - name: bundle install devops
+      command:
+        cmd: 'bundle install'
+        chdir: "{{ user_home }}/workspace/devops"
+    - name: symlink devops comman to /usr/local/bin
+      become: true
+      file:
+        state: link
+        src: "{{ user_home }}/workspace/devops/Thorfile"
+        dest: '/usr/local/bin/devops'
+    - name: copy mavenlink-vpn to /usr/local/bin
+      become: true
+      copy:
+        src: "{{ user_home }}/bootstrap-workstation/ansible/roles/daemon-scripts/files/mavenlink-vpn"
+        dest: '/usr/local/bin/'
+        remote_src: yes
+        mode: 0755
+    - name: copy mavenlink-signal to /usr/local/bin
+      become: true
+      copy:
+        src: "{{ user_home }}/bootstrap-workstation/ansible/roles/daemon-scripts/files/mavenlink-signal"
+        dest: '/usr/local/bin/'
+        remote_src: yes
+        mode: 0755
+    - name: insert env_keep line into sudoers
+      become: true
+      lineinfile:
+        path: /etc/sudoers
+        state: present
+        line: Defaults env_keep += "VPN_USERNAME VPN_PASSWORD_MFA"
+        insertafter: '^Defaults'
